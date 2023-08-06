@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-module Imgproxy::Rails # :nodoc:
+module ImgproxyRails
   VERSION = "0.0.1"
 end
