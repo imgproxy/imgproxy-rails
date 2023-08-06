@@ -27,9 +27,9 @@ Thumbs.db
 .bundle/
 log/*.log
 pkg/
-spec/dummy/db/*.sqlite3
-spec/dummy/db/*.sqlite3-journal
-spec/dummy/tmp/
+spec/internal/db/*.sqlite
+spec/internal/db/*.sqlite-journal
+spec/internal/tmp/
 
 Gemfile.lock
 Gemfile.local
@@ -41,3 +41,5 @@ tmp/
 .rbnext/
 
 gemfiles/*.lock
+
+*.sqlite
