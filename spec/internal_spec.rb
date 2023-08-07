@@ -65,13 +65,13 @@ RSpec.describe "Dummy app", type: :request do
     describe "#imgproxy_active_storage_url" do
       subject { imgproxy_active_storage_url(option) }
 
-      it { is_expected.to start_with("http://imgproxy.io/unsafe").and include('rails/active_storage') }
+      it { is_expected.to start_with("http://imgproxy.io/unsafe").and include("rails/active_storage") }
     end
 
     describe "#imgproxy_active_storage_path" do
       subject { imgproxy_active_storage_path(option) }
 
-      it { is_expected.to start_with("/unsafe").and include('rails/active_storage') }
+      it { is_expected.to start_with("/unsafe").and include("rails/active_storage") }
     end
   end
 end
