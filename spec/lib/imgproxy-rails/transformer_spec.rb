@@ -60,75 +60,84 @@ describe ImgproxyRails::Transformer do
       it { is_expected.to eq(expected) }
     end
 
-    context "landscape" do
-      let(:params) { [1000, 1000, {background: "#bbbbc4"}] }
+    context "when landscape" do
+      let(:params) { [1000, 1000] }
       let(:meta) { {"width" => 1664, "height" => 960} }
 
       it_behaves_like "transforms to",
         width: 1000,
         height: 1000,
         padding: [212, 0],
-        background: "bbbbc4",
         mw: 1000
 
-      context "target height and width > original image" do
-        let(:params) { [2000, 2000, {background: "#bbbbc4"}] }
+      context "when target height and width > original image" do
+        let(:params) { [2000, 2000] }
         let(:meta) { {"width" => 1664, "height" => 960} }
 
         it_behaves_like "transforms to",
           width: 2000,
           height: 2000,
           padding: [423, 0],
-          background: "bbbbc4",
           mw: 2000
       end
 
-      context "target height and width < original image" do
-        let(:params) { [500, 500, {background: "#bbbbc4"}] }
+      context "when target height and width < original image" do
+        let(:params) { [500, 500] }
         let(:meta) { {"width" => 1664, "height" => 960} }
 
         it_behaves_like "transforms to",
           width: 500,
           height: 500,
           padding: [106, 0],
-          background: "bbbbc4",
           mw: 500
       end
     end
 
-    context "vertical" do
-      let(:params) { [1000, 1000, {background: "#bbbbc4"}] }
+    context "when vertical" do
+      let(:params) { [1000, 1000] }
       let(:meta) { {"width" => 799, "height" => 1280} }
 
       it_behaves_like "transforms to",
         width: 1000,
         height: 1000,
         padding: [0, 188],
-        background: "bbbbc4",
         mh: 1000
 
-      context "target height and width > original image" do
-        let(:params) { [2000, 2000, {background: "#bbbbc4"}] }
+      context "when target height and width > original image" do
+        let(:params) { [2000, 2000] }
         let(:meta) { {"width" => 799, "height" => 1280} }
 
         it_behaves_like "transforms to",
           width: 2000,
           height: 2000,
           padding: [0, 376],
-          background: "bbbbc4",
           mh: 2000
       end
 
-      context "target height and width < original image" do
-        let(:params) { [500, 500, {background: "#bbbbc4"}] }
+      context "when target height and width < original image" do
+        let(:params) { [500, 500] }
         let(:meta) { {"width" => 799, "height" => 1280} }
 
         it_behaves_like "transforms to",
           width: 500,
           height: 500,
           padding: [0, 94],
-          background: "bbbbc4",
           mh: 500
+      end
+    end
+
+    describe "background option" do
+      context "when background is not present" do
+        let(:params) { [1000, 1000, {background: "#bbbbc4"}] }
+        let(:meta) { {"width" => 100, "height" => 100} }
+
+        it { is_expected.to include(background: "bbbbc4") }
+
+        context "when invalid" do
+          let(:params) { [1000, 1000, {background: "invalid"}] }
+
+          it { is_expected.to_not have_key(:background) }
+        end
       end
     end
   end
