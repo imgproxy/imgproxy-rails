@@ -17,7 +17,7 @@ module ImgproxyRails
             if VARIANT_CLASSES.any? { |klass| model.is_a?(klass.constantize) }
               url = route_for(:rails_storage_proxy, model.blob, options)
               transformations = model.variation.transformations
-              ::Imgproxy.url_for(url, Transformer.call(transformations))
+              Imgproxy.url_for(url, Transformer.call(transformations, model.blob.metadata))
             else
               route_for(:rails_storage_proxy, model, options)
             end
