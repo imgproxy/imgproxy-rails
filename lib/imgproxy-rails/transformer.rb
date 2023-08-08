@@ -67,7 +67,7 @@ module ImgproxyRails
 
           # setting min-width for correct upscaling
           result[:mw] = target_width
-        else
+        elsif aspect_ratio < 1
           # add horizontal padding
           final_width = target_height.to_f * aspect_ratio
           padding_length = ((target_width - final_width) / 2).round
