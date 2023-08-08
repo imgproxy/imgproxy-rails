@@ -46,13 +46,14 @@ module ImgproxyRails
       private
 
       def convert_color(color)
-        return unless color || color =~ /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/
+        return unless color && color =~ /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/
 
         color.sub(/^#/, "")
       end
 
       def resize_and_pad(p, m)
         target_width, target_height, options = p
+        options ||= {}
 
         result = {width: target_width, height: target_height}
         return result unless m["width"] && m["height"]
