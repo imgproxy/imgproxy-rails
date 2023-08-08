@@ -126,6 +126,13 @@ describe ImgproxyRails::Transformer do
       end
     end
 
+    context "when square" do
+      let(:params) { [1000, 1000] }
+      let(:meta) { {"width" => 500, "height" => 500} }
+
+      it_behaves_like "transforms to", width: 1000, height: 1000
+    end
+
     describe "background option" do
       context "when background is not present" do
         let(:params) { [1000, 1000, {background: "#bbbbc4"}] }
