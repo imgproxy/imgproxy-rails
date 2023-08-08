@@ -20,3 +20,6 @@ AllCops:
 
 Standard/BlockSingleLineBraces:
   Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
