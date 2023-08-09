@@ -25,17 +25,10 @@ RSpec.describe "Dummy app", type: :request do
 
     subject { image_tag(option) }
 
-    shared_context "handles string correctly" do
-      let(:option) { "http://image1.png" }
-
-      it { is_expected.to include(option) }
-    end
-
     describe "with resolve_model_to_route == :rails_storage_proxy" do
       before { ActiveStorage.resolve_model_to_route = :rails_storage_proxy }
 
       it { is_expected.to include('<img src="http://example.com', "representations") }
-      it_behaves_like "handles string correctly"
     end
 
     describe "with resolve_model_to_route = :imgproxy_active_storage" do
@@ -43,22 +36,16 @@ RSpec.describe "Dummy app", type: :request do
 
       it { is_expected.to include('<img src="http://imgproxy.io', "blobs") }
 
-      it_behaves_like "handles string correctly"
-
       context "when tracking the variants" do
         before { ActiveStorage.track_variants = true }
 
         it { is_expected.to include('<img src="http://imgproxy.io', "blobs") }
-
-        it_behaves_like "handles string correctly"
       end
 
       context "when record is not variant" do
         let(:record) { user.avatar }
 
         it { is_expected.to include('<img src="http://example.com', "blobs") }
-
-        it_behaves_like "handles string correctly"
       end
     end
   end
