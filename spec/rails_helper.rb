@@ -19,3 +19,6 @@ require "imgproxy-rails"
 class User < ActiveRecord::Base
   has_one_attached :avatar
 end
+
+Rails.application.routes.default_url_options[:host] = "http://example.com"
+Imgproxy.configure { |config| config.endpoint = "http://imgproxy.io" }

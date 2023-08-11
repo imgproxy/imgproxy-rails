@@ -4,7 +4,8 @@ require "rails_helper"
 
 RSpec.describe "Dummy app", type: :request do
   let(:option) { record }
-  let(:record) { user.avatar.variant(resize_to_limit: [500, 500]) }
+  let(:record) { user.avatar.variant(variant_options) }
+  let(:variant_options) { {resize_to_limit: [500, 500]} }
   let(:user) do
     User.create.tap do |user|
       user.avatar.attach(
@@ -24,11 +25,6 @@ RSpec.describe "Dummy app", type: :request do
     end
   end
 
-  before do
-    Rails.application.routes.default_url_options[:host] = "http://example.com"
-    Imgproxy.configure { |config| config.endpoint = "http://imgproxy.io" }
-  end
-
   describe "image_tag" do
     include ActionView::Helpers::AssetTagHelper
 
@@ -38,12 +34,24 @@ RSpec.describe "Dummy app", type: :request do
       before { ActiveStorage.resolve_model_to_route = :rails_storage_proxy }
 
       it { is_expected.to include('<img src="http://example.com', "representations") }
+
+      context "when imgproxy_options are passed" do
+        let(:variant_options) { {imgproxy_options: {width: 100}} }
+
+        it { is_expected.to include('<img src="http://example.com', "representations") }
+      end
     end
 
     describe "with resolve_model_to_route = :imgproxy_active_storage" do
       before { ActiveStorage.resolve_model_to_route = :imgproxy_active_storage }
 
       it { is_expected.to include('<img src="http://imgproxy.io', "blobs") }
+
+      context "when imgproxy_options are passed" do
+        let(:variant_options) { {imgproxy_options: {width: 100}} }
+
+        it { is_expected.to include('<img src="http://imgproxy.io', "w:100", "blobs") }
+      end
 
       context "when tracking the variants" do
         before { ActiveStorage.track_variants = true }

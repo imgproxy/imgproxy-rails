@@ -2,7 +2,6 @@
 
 begin
   require "pry-byebug"
-  require "byebug"
 rescue LoadError
 end
 ENV["RAILS_ENV"] = "test"
