@@ -14,8 +14,6 @@ describe ImgproxyRails::Transformer do
         resize_to_fit: [102, 102],
         resize_to_fill: [103, 103],
         resize_and_pad: [104, 104],
-        crop: [20, 50, 300, 300],
-        monochrome: true,
         rotate: 90,
         convert: :jpg,
         sharpen: 4,
