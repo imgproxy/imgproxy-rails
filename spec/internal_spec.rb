@@ -14,6 +14,15 @@ RSpec.describe "Dummy app", type: :request do
       )
     end
   end
+  let(:user_with_previewable_image) do
+    User.create.tap do |user|
+      user.avatar.attach(
+        io: File.open("spec/previewable.pdf"),
+        filename: "avatar.pdf",
+        content_type: "application/pdf"
+      )
+    end
+  end
 
   before do
     Rails.application.routes.default_url_options[:host] = "http://example.com"
@@ -46,6 +55,12 @@ RSpec.describe "Dummy app", type: :request do
         let(:record) { user.avatar }
 
         it { is_expected.to include('<img src="http://example.com', "blobs") }
+      end
+
+      context "when record is previewable" do
+        let(:record) { user_with_previewable_image.avatar.preview(resize_to_limit: [500, 500]) }
+
+        it { is_expected.to include('<img src="http://example.com', "representations") }
       end
     end
   end
