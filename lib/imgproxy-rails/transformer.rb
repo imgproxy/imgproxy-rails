@@ -11,34 +11,27 @@ module ImgproxyRails
       resize_to_fit: proc { |p| {width: p[0], height: p[1]} },
       resize_to_fill: proc { |p| {width: p[0], height: p[1], resizing_type: :fill} },
       resize_and_pad: proc { |p, m| resize_and_pad(p, m) },
-      crop: proc { false }, # Cropping API is different in imgproxy
-      monochrome: proc { false },
-      rotate: proc { true },
       convert: proc { |p| {format: p} },
-      sharpen: proc { true }, # TODO: needs to be weighted
-      blur: proc { true }, # TODO: needs to be weighted
-      quality: proc { true },  # TODO: needs to be weighted
       trim: proc { {trim: 0} },
       modulate: proc { |p| modulate(p) }
-    }
+    }.freeze
+
+    PASSTHROUGH_OPTIONS = Set.new([
+      "rotate",
+      "sharpen",
+      "blur",
+      "quality"
+    ]).freeze
 
     class << self
       def call(transformations, meta)
         passed_options = transformations.delete(:imgproxy_options) || {}
         mapped_options = transformations.each_with_object({}) do |(t_key, t_value), memo|
-          next unless MAP.key?(t_key)
-
-          map_value = MAP[t_key].call(t_value, meta)
-          case map_value
-          when FalseClass
-            next # TODO: log warning?
-          when TrueClass
+          if PASSTHROUGH_OPTIONS.include?(t_key.to_s)
             memo[t_key] = t_value
-          when Hash
-            memo.merge!(map_value)
-          else
-            raise "Unexpected map value class"
+            next
           end
+          memo.merge!(MAP[t_key].call(t_value, meta)) if MAP.key?(t_key)
         end
         mapped_options.merge(passed_options)
       end
