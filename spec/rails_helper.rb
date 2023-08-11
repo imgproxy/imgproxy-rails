@@ -22,3 +22,10 @@ end
 
 Rails.application.routes.default_url_options[:host] = "http://example.com"
 Imgproxy.configure { |config| config.endpoint = "http://imgproxy.io" }
+
+# Run activestorage migrations
+active_storage_path = Gem::Specification.find_by_name("activestorage").gem_dir
+ActiveRecord::MigrationContext.new(
+  File.join(active_storage_path, "db/migrate"),
+  ActiveRecord::SchemaMigration
+).migrate
