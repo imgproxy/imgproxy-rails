@@ -28,10 +28,15 @@ jobs:
           gemfile: "gemfiles/railsmaster.gemfile"
     steps:
     - uses: actions/checkout@v3
+
+    - name: Install muPDF
+      run: sudo apt-get install -y mupdf mupdf-tools
+
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
         bundler-cache: true
+
     - name: Run RSpec
       run: |
         bundle exec rspec
