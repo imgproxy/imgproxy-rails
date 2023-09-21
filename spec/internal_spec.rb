@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Dummy app", type: :request do
+describe "Dummy app" do
   let(:option) { record }
   let(:record) { user.avatar.variant(variant_options) }
   let(:variant_options) { {resize_to_limit: [500, 500]} }
