@@ -1,6 +1,6 @@
 [![Gem Version](https://badge.fury.io/rb/imgproxy-rails.svg)](https://rubygems.org/gems/imgproxy-rails)
-[![Build](https://github.com/palkan/imgproxy-rails/workflows/Build/badge.svg)](https://github.com/palkan/imgproxy-rails/actions)
-[![JRuby Build](https://github.com/palkan/imgproxy-rails/workflows/Build%20JRuby/badge.svg)](https://github.com/palkan/imgproxy-rails/actions)
+[![Build](https://github.com/imgproxy/imgproxy-rails/workflows/Build/badge.svg)](https://github.com/imgproxy/imgproxy-rails/actions)
+[![JRuby Build](https://github.com/imgproxy/imgproxy-rails/workflows/Build%20JRuby/badge.svg)](https://github.com/imgproxy/imgproxy-rails/actions)
 
 # imgproxy-rails
 
@@ -64,7 +64,7 @@ Current.user.avatar.variant(resize: "100x100", imgproxy_options: {height: 50, wi
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at [https://github.com/palkan/imgproxy-rails](https://github.com/palkan/imgproxy-rails).
+Bug reports and pull requests are welcome on GitHub at [https://github.com/imgproxy/imgproxy-rails](https://github.com/imgproxy/imgproxy-rails).
 
 ## Credits
 

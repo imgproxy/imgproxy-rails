@@ -7,16 +7,16 @@ Gem::Specification.new do |s|
   s.version = ImgproxyRails::VERSION
   s.authors = ["Vladimir Dementyev", "Albert Pazderin"]
   s.email = ["dementiev.vm@gmail.com", "afaceisnomore@gmail.com"]
-  s.homepage = "http://github.com/evilmartians/imgproxy-rails"
+  s.homepage = "http://github.com/imgproxy/imgproxy-rails"
   s.summary = "integration of imgproxy.rb with ActiveStorage::Variant API"
   s.description = "A gem that integrates imgproxy.rb with ActiveStorage::Variant API"
 
   s.metadata = {
-    "bug_tracker_uri" => "http://github.com/evilmartians/imgproxy-rails/issues",
-    "changelog_uri" => "https://github.com/evilmartians/imgproxy-rails/blob/master/CHANGELOG.md",
-    "documentation_uri" => "http://github.com/evilmartians/imgproxy-rails",
-    "homepage_uri" => "http://github.com/evilmartians/imgproxy-rails",
-    "source_code_uri" => "http://github.com/evilmartians/imgproxy-rails"
+    "bug_tracker_uri" => "http://github.com/imgproxy/imgproxy-rails/issues",
+    "changelog_uri" => "https://github.com/imgproxy/imgproxy-rails/blob/master/CHANGELOG.md",
+    "documentation_uri" => "http://github.com/imgproxy/imgproxy-rails",
+    "homepage_uri" => "http://github.com/imgproxy/imgproxy-rails",
+    "source_code_uri" => "http://github.com/imgproxy/imgproxy-rails"
   }
 
   s.license = "MIT"
