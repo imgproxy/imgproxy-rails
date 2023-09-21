@@ -2,7 +2,6 @@
 
 require "spec_helper"
 
-require "bundler/setup"
 require "combustion"
 begin
   Combustion.initialize!(:active_storage, :active_record) do
@@ -14,8 +13,8 @@ rescue => e
   exit(1)
 end
 
+require "rspec/rails"
 require "imgproxy-rails"
-require "database_cleaner/active_record"
 
 class User < ActiveRecord::Base
   has_one_attached :avatar
@@ -32,14 +31,5 @@ ActiveRecord::MigrationContext.new(
 ).migrate
 
 RSpec.configure do |config|
-  config.before(:suite) do
-    DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with(:truncation)
-  end
-
-  config.around(:each) do |example|
-    DatabaseCleaner.cleaning do
-      example.run
-    end
-  end
+  config.use_transactional_fixtures = true
 end

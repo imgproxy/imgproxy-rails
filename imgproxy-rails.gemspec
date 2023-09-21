@@ -32,7 +32,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "combustion", ">= 1.1"
   s.add_development_dependency "rake", ">= 13.0"
   s.add_development_dependency "rspec", ">= 3.9"
+  s.add_development_dependency "rspec-rails", ">= 4.0"
   s.add_development_dependency "rails", "~> 7.0.3"
   s.add_development_dependency "image_processing", "~> 1.2"
-  s.add_development_dependency "database_cleaner-active_record"
 end
