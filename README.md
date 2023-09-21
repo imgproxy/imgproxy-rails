@@ -1,4 +1,6 @@
-[![Gem Version](https://badge.fury.io/rb/imgproxy-rails.svg)](https://rubygems.org/gems/imgproxy-rails) [![Build](https://github.com/palkan/imgproxy-rails/workflows/Build/badge.svg)](https://github.com/palkan/imgproxy-rails/actions)
+[![Gem Version](https://badge.fury.io/rb/imgproxy-rails.svg)](https://rubygems.org/gems/imgproxy-rails)
+[![Build](https://github.com/palkan/imgproxy-rails/workflows/Build/badge.svg)](https://github.com/palkan/imgproxy-rails/actions)
+[![JRuby Build](https://github.com/palkan/imgproxy-rails/workflows/Build%20JRuby/badge.svg)](https://github.com/palkan/imgproxy-rails/actions)
 
 # imgproxy-rails
 
@@ -16,7 +18,7 @@ gem "imgproxy-rails"
 ### Supported Ruby versions
 
 - Ruby (MRI) >= 2.7.0
-- JRuby >= 9.2.9
+- JRuby >= 9.3.0
 
 ### Supported Rails versions
 
