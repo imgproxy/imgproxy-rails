@@ -35,6 +35,7 @@ describe ImgproxyRails::Transformer do
       {
         width: 500,
         height: 500,
+        enlarge: true,
         resizing_type: :fit,
         rotate: 90,
         format: :jpg,

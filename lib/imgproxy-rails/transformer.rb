@@ -8,8 +8,8 @@ module ImgproxyRails
         {width: width, height: height}
       end,
       resize_to_limit: proc { |p| {width: p[0], height: p[1]} },
-      resize_to_fit: proc { |p| {width: p[0], height: p[1]} },
-      resize_to_fill: proc { |p| {width: p[0], height: p[1], resizing_type: :fill} },
+      resize_to_fit: proc { |p| {width: p[0], height: p[1], enlarge: true} },
+      resize_to_fill: proc { |p| {width: p[0], height: p[1], resizing_type: :fill, enlarge: true} },
       resize_and_pad: proc { |p, m| resize_and_pad(p, m) },
       convert: proc { |p| {format: p} },
       trim: proc { {trim: 0} },
