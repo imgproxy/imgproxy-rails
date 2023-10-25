@@ -45,7 +45,7 @@ describe "Dummy app" do
     describe "with resolve_model_to_route = :imgproxy_active_storage" do
       before { ActiveStorage.resolve_model_to_route = :imgproxy_active_storage }
 
-      it { is_expected.to include('<img src="http://imgproxy.io', "blobs") }
+      it { is_expected.to include('<img src="http://imgproxy.io', "rails/active_storage/blobs/proxy") }
 
       context "when imgproxy_options are passed" do
         let(:variant_options) { {imgproxy_options: {width: 100}} }
@@ -69,6 +69,37 @@ describe "Dummy app" do
         let(:record) { user_with_previewable_image.avatar.preview(resize_to_limit: [500, 500]) }
 
         it { is_expected.to include('<img src="http://example.com', "representations") }
+      end
+
+      context "when using short S3 urls with imgproxy", skip: ActiveStorage::VERSION::MAJOR < 7 do
+        let(:s3_service_class) do
+          stub_const("ActiveStorage::Service::S3Service", Class.new(SimpleDelegator) do
+            def name
+              "fake_cloud"
+            end
+
+            def bucket
+              OpenStruct.new(name: "test-bucket")
+            end
+          end)
+        end
+
+        let(:services) { ActiveStorage::Blob.services.instance_variable_get(:@services) }
+
+        before do
+          fake_cloud_service = s3_service_class.new(ActiveStorage::Blob.service)
+          services[:fake_cloud] = fake_cloud_service
+          ActiveStorage::Blob.service = :fake_cloud
+          Imgproxy.config.use_s3_urls = true
+        end
+
+        after do
+          services.delete(:fake_cloud)
+          ActiveStorage::Blob.service = :test
+          Imgproxy.config.use_s3_urls = false
+        end
+
+        it { is_expected.to include('<img src="http://imgproxy.io', "s3://test-bucket", record.blob.key) }
       end
     end
   end
