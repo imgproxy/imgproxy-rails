@@ -48,7 +48,7 @@ module ImgproxyRails
         target_width, target_height, options = p
         options ||= {}
 
-        result = {width: target_width, height: target_height}
+        result = {width: target_width, height: target_height, extend: true}
         return result unless m["width"] && m["height"]
 
         aspect_ratio = m["width"].to_f / m["height"]

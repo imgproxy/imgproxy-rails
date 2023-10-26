@@ -36,6 +36,7 @@ describe ImgproxyRails::Transformer do
         width: 500,
         height: 500,
         enlarge: true,
+        extend: true,
         resizing_type: :fit,
         rotate: 90,
         format: :jpg,
@@ -66,6 +67,7 @@ describe ImgproxyRails::Transformer do
       it_behaves_like "transforms to",
         width: 1000,
         height: 1000,
+        extend: true,
         padding: [212, 0],
         mw: 1000
 
@@ -76,6 +78,7 @@ describe ImgproxyRails::Transformer do
         it_behaves_like "transforms to",
           width: 2000,
           height: 2000,
+          extend: true,
           padding: [423, 0],
           mw: 2000
       end
@@ -87,6 +90,7 @@ describe ImgproxyRails::Transformer do
         it_behaves_like "transforms to",
           width: 500,
           height: 500,
+          extend: true,
           padding: [106, 0],
           mw: 500
       end
@@ -99,6 +103,7 @@ describe ImgproxyRails::Transformer do
       it_behaves_like "transforms to",
         width: 1000,
         height: 1000,
+        extend: true,
         padding: [0, 188],
         mh: 1000
 
@@ -109,6 +114,7 @@ describe ImgproxyRails::Transformer do
         it_behaves_like "transforms to",
           width: 2000,
           height: 2000,
+          extend: true,
           padding: [0, 376],
           mh: 2000
       end
@@ -120,6 +126,7 @@ describe ImgproxyRails::Transformer do
         it_behaves_like "transforms to",
           width: 500,
           height: 500,
+          extend: true,
           padding: [0, 94],
           mh: 500
       end
@@ -129,7 +136,7 @@ describe ImgproxyRails::Transformer do
       let(:params) { [1000, 1000] }
       let(:meta) { {"width" => 500, "height" => 500} }
 
-      it_behaves_like "transforms to", width: 1000, height: 1000
+      it_behaves_like "transforms to", width: 1000, height: 1000, extend: true
     end
 
     describe "background option" do
