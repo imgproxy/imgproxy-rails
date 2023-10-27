@@ -5,7 +5,7 @@ require "imgproxy-rails/transformer"
 
 describe ImgproxyRails::Transformer do
   describe ".call" do
-    subject { described_class.call(transformations, {width: 1000, height: 1000}) }
+    subject { described_class.call(transformations) }
 
     let(:transformations) do
       {
@@ -54,14 +54,13 @@ describe ImgproxyRails::Transformer do
   end
 
   describe ".resize_and_pad" do
-    subject { described_class.send(:resize_and_pad, params, meta) }
+    subject { described_class.send(:resize_and_pad, params) }
 
     shared_examples "transforms to" do |expected|
       it { is_expected.to eq(expected) }
     end
 
     let(:params) { [1000, 1000] }
-    let(:meta) { {"width" => 1664, "height" => 960} }
 
     specify do
       is_expected.to eq(
@@ -73,7 +72,6 @@ describe ImgproxyRails::Transformer do
 
     context "when background is present" do
       let(:params) { [1000, 1000, {background: "#bbbbc4"}] }
-      let(:meta) { {"width" => 100, "height" => 100} }
 
       it { is_expected.to include(background: "bbbbc4") }
 
@@ -86,7 +84,6 @@ describe ImgproxyRails::Transformer do
 
     context "when gravity is present" do
       let(:params) { [1000, 1000, {gravity: :"north-east"}] }
-      let(:meta) { {"width" => 100, "height" => 100} }
 
       it { expect(subject.fetch(:extend)).to eq(extend: true, gravity: "ne") }
     end
