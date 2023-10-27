@@ -60,98 +60,35 @@ describe ImgproxyRails::Transformer do
       it { is_expected.to eq(expected) }
     end
 
-    context "when landscape" do
-      let(:params) { [1000, 1000] }
-      let(:meta) { {"width" => 1664, "height" => 960} }
+    let(:params) { [1000, 1000] }
+    let(:meta) { {"width" => 1664, "height" => 960} }
 
-      it_behaves_like "transforms to",
+    specify do
+      is_expected.to eq(
         width: 1000,
         height: 1000,
-        extend: true,
-        padding: [212, 0],
-        mw: 1000
+        extend: true
+      )
+    end
 
-      context "when target height and width > original image" do
-        let(:params) { [2000, 2000] }
-        let(:meta) { {"width" => 1664, "height" => 960} }
+    context "when background is present" do
+      let(:params) { [1000, 1000, {background: "#bbbbc4"}] }
+      let(:meta) { {"width" => 100, "height" => 100} }
 
-        it_behaves_like "transforms to",
-          width: 2000,
-          height: 2000,
-          extend: true,
-          padding: [423, 0],
-          mw: 2000
-      end
+      it { is_expected.to include(background: "bbbbc4") }
 
-      context "when target height and width < original image" do
-        let(:params) { [500, 500] }
-        let(:meta) { {"width" => 1664, "height" => 960} }
+      context "when invalid" do
+        let(:params) { [1000, 1000, {background: "invalid"}] }
 
-        it_behaves_like "transforms to",
-          width: 500,
-          height: 500,
-          extend: true,
-          padding: [106, 0],
-          mw: 500
+        it { is_expected.to_not have_key(:background) }
       end
     end
 
-    context "when vertical" do
-      let(:params) { [1000, 1000] }
-      let(:meta) { {"width" => 799, "height" => 1280} }
+    context "when gravity is present" do
+      let(:params) { [1000, 1000, {gravity: :"north-east"}] }
+      let(:meta) { {"width" => 100, "height" => 100} }
 
-      it_behaves_like "transforms to",
-        width: 1000,
-        height: 1000,
-        extend: true,
-        padding: [0, 188],
-        mh: 1000
-
-      context "when target height and width > original image" do
-        let(:params) { [2000, 2000] }
-        let(:meta) { {"width" => 799, "height" => 1280} }
-
-        it_behaves_like "transforms to",
-          width: 2000,
-          height: 2000,
-          extend: true,
-          padding: [0, 376],
-          mh: 2000
-      end
-
-      context "when target height and width < original image" do
-        let(:params) { [500, 500] }
-        let(:meta) { {"width" => 799, "height" => 1280} }
-
-        it_behaves_like "transforms to",
-          width: 500,
-          height: 500,
-          extend: true,
-          padding: [0, 94],
-          mh: 500
-      end
-    end
-
-    context "when square" do
-      let(:params) { [1000, 1000] }
-      let(:meta) { {"width" => 500, "height" => 500} }
-
-      it_behaves_like "transforms to", width: 1000, height: 1000, extend: true
-    end
-
-    describe "background option" do
-      context "when background is not present" do
-        let(:params) { [1000, 1000, {background: "#bbbbc4"}] }
-        let(:meta) { {"width" => 100, "height" => 100} }
-
-        it { is_expected.to include(background: "bbbbc4") }
-
-        context "when invalid" do
-          let(:params) { [1000, 1000, {background: "invalid"}] }
-
-          it { is_expected.to_not have_key(:background) }
-        end
-      end
+      it { expect(subject.fetch(:extend)).to eq(extend: true, gravity: "ne") }
     end
   end
 end

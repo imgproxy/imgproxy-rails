@@ -16,6 +16,18 @@ module ImgproxyRails
       modulate: proc { |p| modulate(p) }
     }.freeze
 
+    GRAVITY = {
+      "north" => "no",
+      "north-east" => "noea",
+      "east" => "ea",
+      "south-east" => "soea",
+      "south" => "so",
+      "south-west" => "sowe",
+      "west" => "we",
+      "north-west" => "nowe",
+      "centre" => "ce"
+    }.freeze
+
     PASSTHROUGH_OPTIONS = Set.new([
       "rotate",
       "sharpen",
@@ -49,29 +61,13 @@ module ImgproxyRails
         options ||= {}
 
         result = {width: target_width, height: target_height, extend: true}
-        return result unless m["width"] && m["height"]
-
-        aspect_ratio = m["width"].to_f / m["height"]
-        if aspect_ratio > 1
-          # add vertical padding
-          final_height = target_width.to_f / aspect_ratio
-          padding_length = ((target_height - final_height) / 2).round
-          result[:padding] = [padding_length, 0]
-
-          # setting min-width for correct upscaling
-          result[:mw] = target_width
-        elsif aspect_ratio < 1
-          # add horizontal padding
-          final_width = target_height.to_f * aspect_ratio
-          padding_length = ((target_width - final_width) / 2).round
-          result[:padding] = [0, padding_length]
-
-          # setting min-height for correct upscaling
-          result[:mh] = target_height
-        end
 
         if (background = convert_color(options[:background]))
           result[:background] = background
+        end
+
+        if (gravity = GRAVITY[options[:gravity].to_s])
+          result[:extend] = {extend: true, gravity: gravity}
         end
 
         result
