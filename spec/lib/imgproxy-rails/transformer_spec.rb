@@ -85,7 +85,7 @@ describe ImgproxyRails::Transformer do
     context "when gravity is present" do
       let(:params) { [1000, 1000, {gravity: :"north-east"}] }
 
-      it { expect(subject.fetch(:extend)).to eq(extend: true, gravity: "ne") }
+      it { expect(subject.fetch(:extend)).to eq(extend: true, gravity: "noea") }
     end
   end
 end
