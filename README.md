@@ -1,8 +1,22 @@
-[![Gem Version](https://badge.fury.io/rb/imgproxy-rails.svg)](https://rubygems.org/gems/imgproxy-rails)
-[![Build](https://github.com/imgproxy/imgproxy-rails/workflows/Build/badge.svg)](https://github.com/imgproxy/imgproxy-rails/actions)
-[![JRuby Build](https://github.com/imgproxy/imgproxy-rails/workflows/Build%20JRuby/badge.svg)](https://github.com/imgproxy/imgproxy-rails/actions)
+<p align="center">
+  <a href="https://imgproxy.net">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/imgproxy/imgproxy/master/assets/logo-dark.svg?sanitize=true">
+      <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/imgproxy/imgproxy/master/assets/logo-light.svg?sanitize=true">
+      <img alt="imgproxy logo" src="https://raw.githubusercontent.com/imgproxy/imgproxy/master/assets/logo-light.svg?sanitize=true">
+    </picture>
+  </a>
+</p>
 
-# imgproxy-rails
+<p align="center">
+<a href="https://github.com/imgproxy/imgproxy-rails/actions"><img alt="GH Test" src="https://img.shields.io/github/actions/workflow/status/imgproxy/imgproxy-rails/rspec.yml?branch=master&label=Test&style=for-the-badge"/></a>
+<a href="https://github.com/imgproxy/imgproxy-rails/actions"><img alt="GH Test Jruby" src="https://img.shields.io/github/actions/workflow/status/imgproxy/imgproxy-rails/rspec-jruby.yml?branch=master&label=Test%20JRuby&style=for-the-badge"/></a>
+<a href="https://github.com/imgproxy/imgproxy-rails/actions"><img alt="GH Lint" src="https://img.shields.io/github/actions/workflow/status/imgproxy/imgproxy-rails/rubocop.yml?branch=master&label=Lint&style=for-the-badge"/></a>
+<a href="https://rubygems.org/gems/imgproxy-rails"><img alt="Gem" src="https://img.shields.io/gem/v/imgproxy-rails.svg?style=for-the-badge"/></a>
+<a href="https://www.rubydoc.info/gems/imgproxy-rails"><img alt="rubydoc.org" src="https://img.shields.io/badge/rubydoc-reference-blue.svg?style=for-the-badge"/></a>
+</p>
+
+---
 
 Integration of [imgproxy.rb](https://github.com/imgproxy/imgproxy.rb) with [ActiveStorage::Variant API](https://edgeapi.rubyonrails.org/classes/ActiveStorage/Variant.htmlasses/ActiveStorage/Variant.html).
 
