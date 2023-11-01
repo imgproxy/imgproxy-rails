@@ -18,7 +18,7 @@
 
 ---
 
-Integration of [imgproxy.rb](https://github.com/imgproxy/imgproxy.rb) with [ActiveStorage::Variant API](https://edgeapi.rubyonrails.org/classes/ActiveStorage/Variant.htmlasses/ActiveStorage/Variant.html).
+Integration of [imgproxy.rb](https://github.com/imgproxy/imgproxy.rb) with [ActiveStorage::Variant API](https://edgeapi.rubyonrails.org/classes/ActiveStorage/Variant.html).
 
 ## Installation
 
