@@ -76,6 +76,17 @@ You can also specify imgproxy-specific parameters in `imgproxy_options` attribut
 Current.user.avatar.variant(resize: "100x100", imgproxy_options: {height: 50, width: 50})
 ```
 
+### Generating video and PDF previews
+
+If you are an imgproxy Pro user and you want to use it to generate previews for your videos and PDFs, just add their content types to the `variable_content_types` list:
+
+```ruby
+config.active_storage.variable_content_types << "application/pdf"
+config.active_storage.variable_content_types << "video/mp4"
+config.active_storage.variable_content_types << "video/mov"
+# ...etc
+```
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at [https://github.com/imgproxy/imgproxy-rails](https://github.com/imgproxy/imgproxy-rails).

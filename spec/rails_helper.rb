@@ -23,21 +23,6 @@ end
 Rails.application.routes.default_url_options[:host] = "http://example.com"
 Imgproxy.configure { |config| config.endpoint = "http://imgproxy.io" }
 
-# Custom previewer for PDFs to avoid requiring os libs
-# Based on: https://github.com/PacktPublishing/Layered-Design-for-Ruby-on-Rails-Applications/blob/main/Chapter03/06-active-storage-dummy-previewer.rb
-class DummyPDFPreviewer < ActiveStorage::Previewer
-  def self.accept?(blob)
-    blob.content_type == "application/pdf"
-  end
-
-  def preview(**options)
-    output = File.open(File.join(__dir__, "avatar.png"))
-    yield io: output, filename: "#{blob.filename.base}.png", content_type: "image/png", metadata: {"dummy" => true}, **options
-  end
-end
-
-ActiveStorage.previewers << DummyPDFPreviewer
-
 # Run activestorage migrations
 active_storage_path = Gem::Specification.find_by_name("activestorage").gem_dir
 ActiveRecord::MigrationContext.new(
