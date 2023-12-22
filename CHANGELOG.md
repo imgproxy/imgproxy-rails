@@ -2,6 +2,8 @@
 
 ## master
 
+- Added support for `video/*` and `application/pdf` content types. ([@DarthSim][])
+
 ## 0.2.0 (2023-10-26)
 
 - Improved `resize_and_pad` support. ([@palkan][])

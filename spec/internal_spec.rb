@@ -15,10 +15,19 @@ describe "Dummy app" do
       )
     end
   end
-  let(:user_with_previewable_image) do
+  let(:user_with_video) do
     User.create.tap do |user|
       user.avatar.attach(
-        io: File.open("spec/previewable.pdf"),
+        io: File.open("spec/avatar.mp4"),
+        filename: "avatar.png",
+        content_type: "video/mp4"
+      )
+    end
+  end
+  let(:user_with_pdf) do
+    User.create.tap do |user|
+      user.avatar.attach(
+        io: File.open("spec/avatar.pdf"),
         filename: "avatar.pdf",
         content_type: "application/pdf"
       )
@@ -65,10 +74,18 @@ describe "Dummy app" do
         it { is_expected.to include('<img src="http://example.com', "blobs") }
       end
 
-      context "when record is previewable" do
-        let(:record) { user_with_previewable_image.avatar.preview(resize_to_limit: [500, 500]) }
+      context "when record is video" do
+        before { ActiveStorage.variable_content_types << "video/mp4" }
+        let(:record) { user_with_video.avatar.variant(resize_to_limit: [500, 500]) }
 
-        it { is_expected.to include('<img src="http://example.com', "representations") }
+        it { is_expected.to include('<img src="http://imgproxy.io', "blobs") }
+      end
+
+      context "when record is PDF" do
+        before { ActiveStorage.variable_content_types << "application/pdf" }
+        let(:record) { user_with_pdf.avatar.variant(resize_to_limit: [500, 500]) }
+
+        it { is_expected.to include('<img src="http://imgproxy.io', "blobs") }
       end
 
       context "when using short S3 urls with imgproxy", skip: ActiveStorage::VERSION::MAJOR < 7 do

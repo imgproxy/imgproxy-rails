@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
   direct :imgproxy_active_storage do |model, options|
-    if ImgproxyRails::Helpers.image_variation?(model)
+    if ImgproxyRails::Helpers.applicable_variation?(model)
       transformations = model.variation.transformations
       Imgproxy.url_for(model.blob, ImgproxyRails::Transformer.call(transformations))
     else
