@@ -43,3 +43,5 @@ tmp/
 gemfiles/*.lock
 
 *.sqlite
+*.sqlite-shm
+*.sqlite-wal
