@@ -2,7 +2,11 @@
 
 ## master
 
+## 0.3.0 (2023-12-27)
+
 - Added support for `video/*` and `application/pdf` content types. ([@DarthSim][])
+
+- `config/routes.rb` added to gemspec files ([@chloerei][])
 
 ## 0.2.0 (2023-10-26)
 
