@@ -18,7 +18,17 @@
 
 ---
 
-Integration of [imgproxy.rb](https://github.com/imgproxy/imgproxy.rb) with [ActiveStorage::Variant API](https://edgeapi.rubyonrails.org/classes/ActiveStorage/Variant.html).
+Seamless integration of [imgproxy](https://imgproxy.net)–a fast and secure standalone server for resizing and converting remote images–to your Rails app with zero changes to your codebase required.
+
+While [imgproxy.rb](https://github.com/imgproxy/imgproxy.rb) being a framework-agnostic Ruby gem includes proper support for Rails' most popular image attachment options: [Active Storage](https://edgeguides.rubyonrails.org/active_storage_overview.html) and [Shrine](https://github.com/shrinerb/shrine), it requires user to use imgproxy specific API:
+
+```ruby
+user.avatar.imgproxy_url(width: 250, height: 250)
+```
+
+But wouldn't that be awesome to keep using existing variant syntax? For example, to use vips/ImageMagick in dev and imgproxy in production?
+
+And `imgproxy-rails` gem provides just that, thanks to [ActiveStorage::Variant API](https://api.rubyonrails.org/v7.1.3/classes/ActiveStorage/Variant.html) and [Proxy mode](https://guides.rubyonrails.org/active_storage_overview.html#proxy-mode).
 
 ## Installation
 
