@@ -24,11 +24,16 @@ Rails.application.routes.default_url_options[:host] = "http://example.com"
 Imgproxy.configure { |config| config.endpoint = "http://imgproxy.io" }
 
 # Run activestorage migrations
-active_storage_path = Gem::Specification.find_by_name("activestorage").gem_dir
-ActiveRecord::MigrationContext.new(
-  File.join(active_storage_path, "db/migrate"),
-  ActiveRecord::SchemaMigration
-).migrate
+active_storage_migrate_dir = File.join(
+  Gem.loaded_specs["activestorage"].full_gem_path,
+  "db", "migrate"
+)
+
+Dir.children(active_storage_migrate_dir).each do
+  require File.join(active_storage_migrate_dir, _1)
+end
+
+CreateActiveStorageTables.new.migrate(:up)
 
 RSpec.configure do |config|
   config.use_transactional_fixtures = true
